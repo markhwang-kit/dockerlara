@@ -42,6 +42,18 @@ services:
     networks:
       - mynetwork
 
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 8088:80
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - mynetwork
 networks:
   mynetwork:
     driver: bridge
